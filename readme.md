@@ -3,7 +3,7 @@ This project contains a public facing API for viewing the "checkins" of patients
 
 
 ## Deploying
-Run `./deploy.sh` from the root of the repository to stand up the infrastructure and begin triggering checkins.
+Run `./deploy.sh` from the root of the repository to stand up the infrastructure and begin triggering checkins. Make sure you have the appropriate credentials configured in your `~/.aws/credentials` under the profile "inception-health" as well as the AWS cli and terraformed installed to run the deploy script without issue.
 
 Run `./destroy.sh` to tear down all the infrastructure created.
 
@@ -23,7 +23,7 @@ Hitting this url after a few minutes, more and more patients will have checkins 
 ![filled patients](./docs/filled_patients.png)
 
 ## Architecture
-For communicating with the DyanmoDB Checkins table, two lambda functions were used: `backend` and `checkin`. For exposing the backend lambda's retrieval of the Checkin information, an API Gateway is used to integrate with the `backend` lambda. For triggering the checkins to be added to the database, a cloudwatch rule was created triggering the `checkin` lambda every two minutes.
+For communicating with the DyanmoDB Checkins table, two lambda functions were used: `backend` and `checkin`. For exposing the backend lambda's retrieval of the Checkin information, an API Gateway is used to integrate with the `backend` lambda. For triggering the checkins to be added to the database, a cloudwatch rule was created triggering the `checkin` lambda every two minutes. For this archtecture, lambdas were already provided and DynamoDB was indicated in the instructions as the chosen database. API Gateway was chosen as a piece of infrastructure because it provides a REST interface over HTTPS as required by the instructions and it integrate with lambdas. A cloudwatch event rule was chosen as the mechnaism for triggering the checkin lambda on a time interval, because it is very simple and quick to implement, and it fullfils the needs of the assignment.
 
 ![General Architecture](./docs/IH_General_Architecture.png)
 
