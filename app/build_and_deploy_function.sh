@@ -1,7 +1,5 @@
 
 # Build the Dockerfile into a docker image
-ls
-
 docker build -f Dockerfile.lambda -t 478135184665.dkr.ecr.us-east-1.amazonaws.com/inception_health_repository:latest . --no-cache
 
 # Login to ecr.
